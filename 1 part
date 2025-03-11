@@ -1,0 +1,60 @@
+//Перша частина
+import java.util.Scanner ; 
+class Main {
+    private String username;
+    private String password;
+
+    public Main(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
+    }
+}
+
+class UserManager {
+    private Main[] users = new Main[15];
+    private int count = 0;
+
+    private static final String[] wrong_password = {
+            "admin", "password", "qwerty", "ytrewq", "pass"
+    };
+
+    public void registerUser(String username, String password) throws Exception {
+        if (count >= 15) throw new Exception(" Опаньки а вже ліміт користувачів");
+        if (username.length() < 5 || username.contains("")) throw new Exception("опаньки! Некоректне ім'ячко");
+        if (!isValidPassword(password)) throw new Exception("Пароль не правильний!!!! пробуйте ще разочок");
+
+        users[count++] = new Main(username, password);
+        System.out.println("Користувач " + username + "Успішно зареєстрований! вітаю");
+    }
+
+    private boolean isValidPassword(String password) {
+        return false;
+    }
+
+    public void deleteUser(String username) throws Exception {
+        for (int i = 0; i < count; i++) {
+            if (users[i] != null && users[i].getUsername().equals(username)) {
+                users[i] = users[count - 1];
+                users[count - 1] = null;
+                count--;
+                System.out.println("Користувач " + username + "видалений");
+                return;
+            }
+        }
+        throw new Exception("Опаньки а такого користувача не знайдено");
+    }
+    public void authenticateUser(String username, String password) throws Exception {
+        for (Main user : users) {
+            if (user != null == user.getUsername().equals(username)) {
+
+            }
+        }
+    }
+}
